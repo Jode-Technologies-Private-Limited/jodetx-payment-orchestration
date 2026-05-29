@@ -1,48 +1,61 @@
 ---
-title: Welcome to Payment Orchestration
+title: S2S Payment Gateway
+excerpt: >-
+  Use the S2S Payment Gateway APIs to verify VPAs, list payment instruments,
+  initiate transactions, check transaction status, and create checkout payment
+  flows.
 hidden: false
 ---
-<Callout icon="📘" theme="info">
-  **Template:**  Delete this callout and edit this page with your content and links.
-</Callout>
+Use the S2S Payment Gateway APIs to verify payment details, initiate transactions, check transaction status, and create checkout payment flows.
+
+## Base URLs
+
+| Environment | Base URL |
+| --- | --- |
+| UAT | `https://<uat-host>:8085/s2s/v1` |
+| Production | `https://<prod-host>/s2s/v1` |
+
+## Authentication and encryption
+
+Authenticate requests with an HMAC-SHA256 checksum. Send merchant identification with the `X-Merchant-Id` header where required, and include `X-Checksum` for endpoints that require a checksum header.
+
+Requests and responses use AES-256 encryption.
+
+<br />
+
+## API Reference
 
 <Cards>
-  {/* Edit the props below to customize these components */}
-  <Card title="Quick Start" href="#" icon="fa-duotone fa-rocket-launch">Learn how to get started with our product</Card>
+  <Card title="Verify VPA" href="/reference/verify-vpa" icon="fa-duotone fa-badge-check">Check whether a UPI VPA is valid.</Card>
 
-  <Card title="API Reference" href="#" icon="fa-duotone fa-code-simple">Explore endpoints and build your integration</Card>
+  <Card title="Netbanking List" href="/reference/netbanking-list" icon="fa-duotone fa-building-columns">Retrieve available netbanking options.</Card>
 
-  <Card title="Build with AI" href="#" icon="fa-duotone fa-sparkles">Use LLM features to automate your workflow</Card>
+  <Card title="Enabled Instruments" href="/reference/enabled-instruments" icon="fa-duotone fa-credit-card">List enabled payment instruments.</Card>
+
+  <Card title="Initiate Transaction" href="/reference/initiate-transaction" icon="fa-duotone fa-money-check-dollar">Start a payment transaction.</Card>
+
+  <Card title="Transaction Status" href="/reference/transaction-status" icon="fa-duotone fa-list-check">Check the current status of a transaction.</Card>
+
+  <Card title="Checkout Intent" href="/reference/checkout-intent" icon="fa-duotone fa-cart-shopping">Create a checkout payment intent.</Card>
+
+  <Card title="Checkout Payment Link" href="/reference/checkout-payment-link" icon="fa-duotone fa-link">Create a checkout payment link.</Card>
 </Cards>
 
 <br />
 
-## Recent Releases
+## Checksum formulas
 
-<Cards>
-  <Card isNew kind="tile" title="v2.0 Migration" href="#" icon="fa-duotone fa-magnifying-glass">Everything you need to upgrade</Card>
+| API | Formula |
+| --- | --- |
+| Verify VPA | `mid|VPA_VERIFY|vpa|salt` |
+| Netbanking List | `mid|NETBANKING_LIST|salt` |
+| Enabled Instruments | `mid|ENABLED_INSTRUMENTS|salt` |
+| Initiate Transaction | `mid|orderNo|rrn|txnAmount|paymentMode|paymentCode|salt` |
+| Transaction Status | `mid|rrn|txnId|salt` |
 
-  <Card kind="tile" title="Webhooks" href="#" icon="fa-duotone fa-bullhorn">Real-time events are now available</Card>
+## Supported payment modes
 
-  <Card kind="tile" title="Android SDK" href="#" icon="fa-duotone fa-robot">Our native Android library is out of beta</Card>
-</Cards>
-
-<br />
-
-## The Basics
-
-<Cards>
-  <Card kind="tile" title="Customize" href="#" icon="fa-duotone fa-brush">Style the widget to match your brand</Card>
-
-  <Card kind="tile" title="Integrations" href="#" icon="fa-duotone fa-arrow-down-left-and-arrow-up-right-to-center">Connect with third-party services</Card>
-
-  <Card kind="tile" title="CLI" href="#" icon="fa-duotone fa-terminal">Manage resources from your terminal</Card>
-
-  <Card kind="tile" title="Security" href="" icon="fa-duotone fa-shield-dog">Learn how we secure your data</Card>
-
-  <Card kind="tile" title="Common Issues" href="" icon="fa-duotone fa-file-circle-info">Troubleshoot common issues</Card>
-
-  <Card kind="tile" title="Sync" href="#" icon="fa-duotone fa-code-compare">Connect to a storage provider</Card>
-</Cards>
-
-<br />
+- `UPI` — UPI payments
+- `NB` — Net Banking
+- `CC` — Credit Card
+- `DC` — Debit Card
