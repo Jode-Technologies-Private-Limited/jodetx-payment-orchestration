@@ -1,5 +1,5 @@
 ---
-title: '# Overview'
+title: Overview
 excerpt: >-
   S2S Payment Gateway — production-grade REST API platform supporting UPI, Net
   Banking, Credit Card, and Debit Card payments with AES-256 encryption and
