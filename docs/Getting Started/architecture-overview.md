@@ -1,5 +1,5 @@
 ---
-title: '# Architecture Overview'
+title: Architecture Overview
 excerpt: >-
   High-level architecture of the S2S Payment Gateway — components, request
   lifecycle, and security layers.  Understand how the S2S Payment Gateway is
